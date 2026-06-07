@@ -82,11 +82,15 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 }
 .hero-reel{
   position:absolute;inset:0;
-  display:flex;width:100%;
-  transition:transform 0.8s cubic-bezier(.4,0,.2,1);
+  display:block;width:100%;
   contain:paint;
 }
-.hero-panel{width:100%;min-width:100%;flex:0 0 100%;position:relative;overflow:hidden;background:var(--black);contain:paint}
+.hero-panel{
+  position:absolute;inset:0;width:100%;min-width:0;overflow:hidden;background:var(--black);contain:paint;
+  opacity:0;visibility:hidden;transition:opacity 0.65s ease,visibility 0.65s ease;
+  pointer-events:none;
+}
+.hero-panel.active{opacity:1;visibility:visible;pointer-events:auto}
 .hero-panel:nth-child(1){background:#5dc8e8}
 .hero-panel:nth-child(2){background:#f5d020}
 .hero-panel:nth-child(3){background:#6aabdf}
@@ -1964,11 +1968,7 @@ const heroSlides = [
 function goSlide(n) {
   slide = n;
   const heroReel = document.getElementById('heroReel');
-  if (window.matchMedia('(max-width:640px)').matches) {
-    heroReel.style.transform = 'none';
-  } else {
-    heroReel.style.transform = `translateX(-${n*100}%)`;
-  }
+  heroReel.style.transform = 'none';
   document.querySelectorAll('.hero-panel').forEach((p,i) => {
     p.classList.toggle('active',i===n);
     const img = p.querySelector('img');
