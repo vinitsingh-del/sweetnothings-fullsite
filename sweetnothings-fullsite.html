@@ -129,6 +129,17 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .hero-sticker.one{left:58%;top:18%;background:var(--yellow);--rot:-8deg}
 .hero-sticker.two{right:7%;top:34%;background:var(--pink);color:#fff;--rot:9deg}
 .hero-sticker.three{left:46%;bottom:18%;background:var(--green);--rot:6deg}
+.hero-sticker.one,.hero-sticker.two{animation:heroStickerShake 1.15s ease-in-out infinite}
+.hero-sticker.two{animation-delay:0.22s}
+@keyframes heroStickerShake{
+  0%,100%{rotate:0deg;scale:1}
+  12%{rotate:-4deg;scale:1.04}
+  24%{rotate:5deg;scale:1.06}
+  36%{rotate:-6deg;scale:1.04}
+  48%{rotate:4deg;scale:1.05}
+  60%{rotate:-2deg;scale:1.02}
+  72%{rotate:2deg;scale:1.03}
+}
 .hero-mini-card{
   border:2px solid rgba(17,17,17,0.9);border-radius:18px;background:#fffdf8;
   color:#111;padding:14px 16px;min-width:150px;
