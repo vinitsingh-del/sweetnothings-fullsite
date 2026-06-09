@@ -129,8 +129,10 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .hero-sticker.one{left:58%;top:18%;background:var(--yellow);--rot:-8deg}
 .hero-sticker.two{right:7%;top:34%;background:var(--pink);color:#fff;--rot:9deg}
 .hero-sticker.three{left:46%;bottom:18%;background:var(--green);--rot:6deg}
-.hero-sticker.one,.hero-sticker.two{animation:heroStickerShake 1.15s ease-in-out infinite}
+.hero-sticker.one,.hero-sticker.two,.hero-sticker.three,.hero-mini-card.one{animation:heroStickerShake 1.15s ease-in-out infinite}
 .hero-sticker.two{animation-delay:0.22s}
+.hero-sticker.three{animation-delay:0.38s}
+.hero-mini-card.one{animation-delay:0.16s}
 @keyframes heroStickerShake{
   0%,100%{rotate:0deg;scale:1}
   12%{rotate:-4deg;scale:1.04}
@@ -147,7 +149,15 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .hero-mini-card strong{display:block;font-family:'Fraunces',serif;font-size:28px;font-style:italic;line-height:1}
 .hero-mini-card span{display:block;font-size:11px;font-weight:900;text-transform:uppercase;color:#724600;margin-top:5px}
 .hero-mini-card.one{right:12%;bottom:16%;--rot:-5deg}
-.hero-mini-card.two{left:40%;top:28%;--rot:5deg;background:#ffe8ef}
+.hero-mini-card.two{
+  left:40%;top:28%;--rot:5deg;background:#ffe8ef;
+  animation:heroStarShine 1.8s ease-in-out infinite;
+}
+@keyframes heroStarShine{
+  0%,100%{filter:brightness(1);box-shadow:0 18px 34px rgba(0,0,0,0.16)}
+  35%{filter:brightness(1.22);box-shadow:0 18px 34px rgba(0,0,0,0.16),0 0 0 5px rgba(255,212,42,0.34),0 0 42px rgba(255,212,42,0.52)}
+  60%{filter:brightness(1.08);box-shadow:0 18px 34px rgba(0,0,0,0.16),0 0 0 2px rgba(255,121,176,0.24)}
+}
 .hero-content{
   position:relative;z-index:2;
   padding:0 80px 72px;max-width:720px;
