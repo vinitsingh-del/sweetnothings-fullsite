@@ -1516,24 +1516,32 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   }
   .hero-pop-layer{display:none}
   .hero-mobile-badges{
-    position:absolute;left:14px;right:auto;top:76px;z-index:4;
-    display:grid;grid-template-columns:1fr;gap:7px;
-    align-items:start;pointer-events:none;width:142px;
+    position:absolute;left:15px;right:auto;top:88px;z-index:4;
+    display:block;pointer-events:none;width:174px;height:202px;
   }
   .hero-mobile-badges span{
-    display:flex;align-items:center;justify-content:center;text-align:center;
-    min-height:30px;padding:7px 10px;border:1.5px solid rgba(17,17,17,0.92);
+    position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;
+    min-height:28px;padding:7px 11px;border:1.5px solid rgba(17,17,17,0.92);
     border-radius:999px;background:#fffdf8;color:#111;font-size:8.5px;font-weight:900;
-    text-transform:uppercase;line-height:1.05;box-shadow:3px 3px 0 rgba(17,17,17,0.2);
-    transform:rotate(var(--badge-rot,0deg));max-width:132px;justify-self:start;
+    text-transform:uppercase;line-height:1.05;box-shadow:3px 3px 0 rgba(17,17,17,0.24);
+    transform:translate3d(0,0,0) rotate(var(--badge-rot,0deg));
+    width:var(--badge-w,122px);max-width:none;
+    animation:mobileBadgeShake 1.45s ease-in-out infinite;
+    will-change:transform;
   }
-  .hero-mobile-badges span:nth-child(1){background:var(--yellow);--badge-rot:-5deg}
-  .hero-mobile-badges span:nth-child(2){background:var(--pink);color:#fff;--badge-rot:5deg}
-  .hero-mobile-badges span:nth-child(3){background:var(--green);--badge-rot:4deg}
-  .hero-mobile-badges span:nth-child(4){background:#fffdf8;--badge-rot:-4deg}
+  .hero-mobile-badges span:nth-child(1){left:8px;top:0;background:var(--yellow);--badge-rot:-6deg;--badge-w:132px;animation-delay:0s}
+  .hero-mobile-badges span:nth-child(2){left:1px;top:41px;background:var(--pink);color:#fff;--badge-rot:6deg;--badge-w:106px;animation-delay:0.16s}
+  .hero-mobile-badges span:nth-child(3){left:10px;top:82px;background:var(--green);--badge-rot:5deg;--badge-w:118px;animation-delay:0.31s}
+  .hero-mobile-badges span:nth-child(4){left:0;top:123px;background:#fffdf8;--badge-rot:-5deg;--badge-w:126px;animation-delay:0.46s}
   .hero-mobile-badges span:nth-child(5){
-    grid-column:auto;justify-self:start;background:#ffe8ef;font-family:'Fraunces',serif;
-    font-size:13px;font-style:italic;--badge-rot:4deg;
+    left:18px;top:164px;background:#ffe8ef;font-family:'Fraunces',serif;
+    font-size:13px;font-style:italic;--badge-rot:5deg;--badge-w:130px;animation-delay:0.61s;
+  }
+  @keyframes mobileBadgeShake{
+    0%,100%{transform:translate3d(0,0,0) rotate(var(--badge-rot,0deg))}
+    28%{transform:translate3d(3px,-1px,0) rotate(calc(var(--badge-rot,0deg) + 2deg))}
+    56%{transform:translate3d(-2px,1px,0) rotate(calc(var(--badge-rot,0deg) - 1.6deg))}
+    78%{transform:translate3d(1px,0,0) rotate(calc(var(--badge-rot,0deg) + 0.8deg))}
   }
   .hero-pop-layer .hero-sticker,
   .hero-pop-layer .hero-mini-card{--px:0!important;--py:0!important}
