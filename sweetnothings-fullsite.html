@@ -699,12 +699,56 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
   display:flex;align-items:center;gap:8px;
   background:rgba(255,255,255,0.06);
   border:1px solid rgba(255,255,255,0.1);
-  border-radius:30px;padding:8px 16px;
+  border-radius:30px;padding:8px 14px;
   cursor:pointer;transition:all 0.2s;text-decoration:none;
 }
 .retailer-chip:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.3)}
-.chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.chip-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.85)}
+.retailer-logo{
+  height:24px;min-width:24px;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;line-height:1;flex-shrink:0;
+}
+.retailer-word{font-size:14px;font-weight:900;color:rgba(255,255,255,0.9);letter-spacing:-0.01em}
+.logo-walmart{gap:7px}
+.walmart-spark{
+  position:relative;width:20px;height:20px;display:block;filter:drop-shadow(0 0 8px rgba(255,194,32,0.2));
+}
+.walmart-spark i{
+  position:absolute;left:8px;top:1px;width:4px;height:8px;border-radius:999px;background:#ffc220;
+  transform-origin:2px 9px;
+}
+.walmart-spark i:nth-child(2){transform:rotate(60deg)}
+.walmart-spark i:nth-child(3){transform:rotate(120deg)}
+.walmart-spark i:nth-child(4){transform:rotate(180deg)}
+.walmart-spark i:nth-child(5){transform:rotate(240deg)}
+.walmart-spark i:nth-child(6){transform:rotate(300deg)}
+.logo-target{
+  width:22px;height:22px;border-radius:50%;background:#cc0000;box-shadow:inset 0 0 0 6px #fff,inset 0 0 0 10px #cc0000;
+}
+.logo-wholefoods{
+  background:#00674b;border-radius:9px;padding:4px 8px;font-size:9px;line-height:0.9;text-align:center;
+  text-transform:uppercase;min-width:58px;font-family:'Fraunces',serif;
+}
+.logo-kroger{
+  min-width:42px;border-radius:999px;background:#00529b;font-size:14px;font-weight:900;font-style:italic;
+}
+.logo-sprouts{
+  width:26px;height:26px;border-radius:50%;background:#5a8a3c;position:relative;
+}
+.logo-sprouts::before{
+  content:'';position:absolute;left:7px;top:6px;width:10px;height:14px;background:#fff;border-radius:60% 0 60% 0;
+  transform:rotate(-32deg);
+}
+.logo-sprouts::after{
+  content:'';position:absolute;right:6px;top:9px;width:9px;height:11px;background:#d9efc2;border-radius:0 60% 0 60%;
+  transform:rotate(28deg);
+}
+.logo-amazon{
+  min-width:54px;color:#fff;font-size:15px;font-weight:900;position:relative;padding-bottom:5px;letter-spacing:-0.02em;
+}
+.logo-amazon::after{
+  content:'';position:absolute;left:13px;right:5px;bottom:1px;height:7px;border-bottom:3px solid #ff9900;border-radius:0 0 50% 50%;
+  transform:rotate(-8deg);
+}
 
 /* ── LEAD CAPTURE ── */
 .lead-section{
@@ -1908,12 +1952,12 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
     <h2 class="h2 light" style="margin-bottom:16px">15,000+ stores<br><em>and counting.</em></h2>
     <p style="font-size:16px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:28px">From Walmart to Whole Foods, Kroger to Sprouts — Sweet Nothings is expanding every month. Find your nearest stockist in seconds.</p>
     <div class="retailer-chips">
-      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="chip-dot" style="background:#0071CE"></span><span class="chip-label">Walmart</span></div>
-      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="chip-dot" style="background:#CC0000"></span><span class="chip-label">Target</span></div>
-      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="chip-dot" style="background:#00674B"></span><span class="chip-label">Whole Foods</span></div>
-      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="chip-dot" style="background:#00529B"></span><span class="chip-label">Kroger</span></div>
-      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="chip-dot" style="background:#5A8A3C"></span><span class="chip-label">Sprouts</span></div>
-      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="chip-dot" style="background:#FF9900"></span><span class="chip-label">Amazon</span></div>
+      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="retailer-logo logo-walmart"><span class="walmart-spark"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><span class="retailer-word">Walmart</span></div>
+      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="retailer-logo logo-target"></span><span class="retailer-word">Target</span></div>
+      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="retailer-logo logo-wholefoods">Whole<br>Foods</span></div>
+      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="retailer-logo logo-kroger">Kroger</span></div>
+      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="retailer-logo logo-sprouts"></span><span class="retailer-word">Sprouts</span></div>
+      <div class="retailer-chip" onclick="openStoreModal(null)"><span class="retailer-logo logo-amazon">amazon</span></div>
     </div>
     <button class="btn-white" style="margin-top:32px;display:inline-flex;align-items:center;gap:8px" onclick="openStoreModal(null)">
       <svg style="width:15px;height:15px;stroke:var(--black);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
