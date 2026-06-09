@@ -542,19 +542,24 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
     radial-gradient(circle at 50% 46%,rgba(255,255,255,0.38),transparent 42%);
 }
 .product-page-img{
-  position:absolute;z-index:2;inset:-8%;
-  width:116%;height:116%;max-height:none;
+  position:absolute;z-index:2;inset:-13%;
+  width:126%;height:126%;max-height:none;
   object-fit:cover;object-position:center;
   filter:drop-shadow(0 30px 42px rgba(80,45,0,0.25)) saturate(1.05);
-  transform:scale(1.08);
+  transform:scale(1.12);
+  opacity:1;transition:opacity 0.75s ease,transform 4.4s ease;
 }
 .product-page-video{
-  position:absolute;z-index:3;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center;display:none;
+  position:absolute;z-index:3;inset:-5%;width:110%;height:110%;
+  object-fit:cover;object-position:center;display:none;opacity:0;
   filter:saturate(1.08) contrast(1.03);
+  transform:scale(1.1);transition:opacity 0.75s ease;
 }
-.product-page-media.has-video .product-page-img{opacity:0;visibility:hidden}
 .product-page-media.has-video .product-page-video{display:block}
+.product-page-media.media-show-video .product-page-video{opacity:1!important;visibility:visible}
+.product-page-media.media-show-video .product-page-img{opacity:0!important;visibility:visible}
+.product-page-media.media-show-image .product-page-video{opacity:0!important;visibility:visible}
+.product-page-media.media-show-image .product-page-img{opacity:1!important;visibility:visible;transform:scale(1.17)}
 .product-media-badge{
   position:absolute;left:24px;bottom:24px;z-index:5;
   background:#fffdf8;border:2px solid #111;border-radius:999px;
@@ -1555,8 +1560,8 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   .product-page{width:100vw!important;max-width:100vw!important;margin:0 0 22px;border-left:0;border-right:0;border-radius:0}
   .product-page-hero{grid-template-columns:1fr;min-height:0}
   .product-page-media{padding:0;min-height:360px}
-  .product-page-img{inset:-6%;width:112%;height:112%;max-height:none;object-fit:cover;transform:scale(1.08)}
-  .product-page-video{object-position:center;min-height:100%}
+  .product-page-img{inset:-11%;width:122%;height:122%;max-height:none;object-fit:cover;transform:scale(1.13)}
+  .product-page-video{inset:-6%;width:112%;height:112%;object-position:center;min-height:100%}
   .product-hero-tags{
     left:12px;right:54px;top:12px;max-width:none;justify-content:flex-start;
     display:flex;gap:7px;z-index:6;
@@ -2648,6 +2653,13 @@ function smoothScroll(id) {
 // ── PRODUCT DATA ──
 const PRODUCT_NAMES = {1:'Creamy Fruit Pops',2:'Smoothie Pops',3:'Smoothie Bowls',4:'PAW Patrol Pops',5:'Dessert Pops',6:'Nut Butter Bites'};
 const PRODUCT_VIDEO = 'watermark-removed-CREATE_A_NEAT_PARALLALEX_VIDEO.mp4';
+const PRODUCT_MEDIA_SLIDES = {
+  1:[
+    'https://sweetnothings.com/cdn/shop/files/CreamyFruitPops_Orange_FlavorStory_1200x1200_53a58d39-6cdb-49c4-bf92-55a06c110bfb.jpg?v=1771457352',
+    'https://sweetnothings.com/cdn/shop/files/CreamyFruitPops_Strawberry_FlavorStory_1200x1200_b48229bb-53ba-4826-8f98-a01951f213d5.jpg?v=1771457038',
+    'https://sweetnothings.com/cdn/shop/files/CreamyFruitPops_Banana_FlavorStory_1200x1200_b4a57b8e-70a1-43e9-a271-542deb360f21.jpg?v=1771457567'
+  ]
+};
 const PRODUCT_DETAILS = {
   1:{kicker:'Creamy Fruit Pops',accent:'#5dc8e8',pack:'6',price:'$6.99',priceNote:'Estimated retail per 6-pack',rating:'4.8',reviewCount:'248',media:'video',mediaBadge:'Creamy fruit pops in motion',desc:'Creamy organic fruit pops with no added sugar, made for freezer-door cravings and lunchbox wins.',badges:['No added sugar','Whole fruit','Dairy-free pops'],options:['Strawberry & Cream','Oranges & Cream','Bananas & Cream','6-count box'],stock:'Often found in the frozen aisle at Target, Walmart, and Whole Foods.',taste:'Strawberry, orange, banana cream',ingredients:'Fruit, coconut cream, simple organic goodness',best:'After school, morning treats, family freezer stash',bullets:['No checkout here: choose nearby stores and plan the run.','Spin before visiting to unlock a store reward.','Built for families who want dessert energy with cleaner ingredients.'],reward:'Visit a nearby store and unlock a 10% return reward after your Sweet Nothings run.',reviews:['My kids ask for these after school and I feel good saying yes.','Creamy, bright, and not weirdly sweet. The banana one disappears first.','Finally a freezer treat that tastes like fruit, not syrup.']},
   2:{kicker:'Smoothie Pops',accent:'#f5d020',pack:'6',price:'$6.99',priceNote:'Estimated retail per 6-pack',rating:'4.7',reviewCount:'193',mediaBadge:'Smoothie-style freezer pop',desc:'Bright smoothie-style pops that taste like sunshine and keep the ingredient list refreshingly short.',badges:['Organic','No preservatives','Fruit-first'],options:['Mango','Berry','Banana blend','6-count box'],stock:'Check local frozen aisles for current flavour availability.',taste:'Mango, berry, banana blends',ingredients:'Organic fruit, dates, chia, flax',best:'Quick breakfasts, kids snacks, warm afternoons',bullets:['Fruit-first flavour without preservatives.','Easy to find by checking nearby retail availability.','Great for warm afternoons and quick breakfast moments.'],reward:'Find a store nearby and use the wheel reward to plan your first freezer aisle stop.',reviews:['The texture is so smooth. It feels like a mini smoothie bar at home.','Perfect for hot afternoons when I want something light.','My freezer now has a dedicated Sweet Nothings shelf.']},
@@ -2665,6 +2677,7 @@ let spinRotation = 0;
 let spinLocationValue = '';
 let spinIsRunning = false;
 let spinLastReward = null;
+let productMediaTimer = null;
 const SPIN_PRIZES = [
   { label:'10% off unlocked', code:'SWEET10', copy:'Use this starter reward when Sweet Nothings lands near you.', stores:['Walmart','Target','Whole Foods'], weight:26 },
   { label:'Walmart run', code:'WALMART', copy:'Start with Walmart and check the frozen section.', stores:['Walmart','Kroger','Target'], weight:18 },
@@ -2685,6 +2698,47 @@ function productCardIndex(pid) {
 function getProductImage(pid) {
   const card = document.querySelector('.prod-card:nth-child(' + productCardIndex(pid) + ') .prod-img img');
   return card ? card.src : '';
+}
+function stopProductMediaSequence() {
+  if (productMediaTimer) clearTimeout(productMediaTimer);
+  productMediaTimer = null;
+}
+function setProductMediaMode(mode, imgSrc) {
+  const media = document.querySelector('.product-page-media');
+  const img = document.getElementById('productPageImg');
+  const video = document.getElementById('productPageVideo');
+  if (!media || !img || !video) return;
+  if (imgSrc) img.src = imgSrc;
+  media.classList.toggle('media-show-video', mode === 'video');
+  media.classList.toggle('media-show-image', mode === 'image');
+  video.style.opacity = mode === 'video' ? '1' : '0';
+  img.style.opacity = mode === 'image' ? '1' : '0';
+  img.style.visibility = 'visible';
+  video.style.visibility = 'visible';
+  if (mode === 'video') video.play().catch(() => {});
+  else video.pause();
+}
+function startProductMediaSequence(pid) {
+  stopProductMediaSequence();
+  const slides = PRODUCT_MEDIA_SLIDES[pid] || [];
+  if (!slides.length) return;
+  slides.forEach(src => {
+    const preload = new Image();
+    preload.src = src;
+  });
+  let index = -1;
+  const tick = () => {
+    index += 1;
+    if (index === 0) {
+      setProductMediaMode('video');
+      productMediaTimer = setTimeout(tick, 4200);
+      return;
+    }
+    const slideIndex = (index - 1) % slides.length;
+    setProductMediaMode('image', slides[slideIndex]);
+    productMediaTimer = setTimeout(tick, 3300);
+  };
+  tick();
 }
 function openProductPage(pid) {
   const data = PRODUCT_DETAILS[pid];
@@ -2719,11 +2773,12 @@ function openProductPage(pid) {
   const img = document.getElementById('productPageImg');
   const media = document.querySelector('.product-page-media');
   const video = document.getElementById('productPageVideo');
-  media.classList.remove('has-video');
+  stopProductMediaSequence();
+  media.classList.remove('has-video','media-show-video','media-show-image');
   video.pause();
   video.removeAttribute('src');
   video.load();
-  img.src = getProductImage(pid);
+  img.src = (PRODUCT_MEDIA_SLIDES[pid] && PRODUCT_MEDIA_SLIDES[pid][0]) || getProductImage(pid);
   img.alt = PRODUCT_NAMES[pid];
   if (data.media === 'video') {
     video.src = PRODUCT_VIDEO;
@@ -2733,7 +2788,9 @@ function openProductPage(pid) {
     video.setAttribute('aria-label', PRODUCT_NAMES[pid] + ' video');
     media.classList.add('has-video');
     video.load();
-    video.play().catch(() => {});
+    startProductMediaSequence(pid);
+  } else {
+    setProductMediaMode('image', img.src);
   }
   document.getElementById('productFindBtn').onclick = () => {
     closeProductPage();
@@ -2744,6 +2801,7 @@ function openProductPage(pid) {
 }
 function closeProductPage(e) {
   if (e && e.target !== document.getElementById('productPageOverlay')) return;
+  stopProductMediaSequence();
   const video = document.getElementById('productPageVideo');
   if (video) video.pause();
   document.getElementById('productPageOverlay').classList.remove('open');
