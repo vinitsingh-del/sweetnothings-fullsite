@@ -1058,9 +1058,9 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
 .mission-kicker{font-size:10px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.42);margin-bottom:10px}
 .mission-title{font-family:'Fraunces',serif;font-size:clamp(30px,3.8vw,48px);font-style:italic;font-weight:900;line-height:1;color:var(--white)}
 .mission-title em{font-style:normal;font-weight:300;color:rgba(255,255,255,0.72)}
-.mission-right{display:grid;grid-template-columns:0.72fr 1.28fr;gap:16px;align-items:stretch}
+.mission-right{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
 .mission-product{
-  position:relative;min-height:260px;border-radius:18px;overflow:hidden;
+  position:relative;min-height:220px;border-radius:18px;overflow:hidden;
   background:#ffc52d;
   border:1px solid rgba(255,255,255,0.16);
 }
@@ -1075,12 +1075,12 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   transform:scale(1.04);
 }
 .mission-product-cup{
-  position:absolute;right:6%;bottom:18%;width:38%;max-height:48%;object-fit:contain;
+  position:absolute;right:8%;bottom:16%;width:25%;max-height:52%;object-fit:contain;
   filter:drop-shadow(0 20px 22px rgba(70,42,4,0.24));
   transform:rotate(5deg);
 }
 .mission-product-lineup{
-  position:absolute;left:4%;bottom:13%;width:48%;max-height:42%;object-fit:contain;
+  position:absolute;left:5%;bottom:12%;width:34%;max-height:48%;object-fit:contain;
   filter:drop-shadow(0 18px 22px rgba(70,42,4,0.2));
   transform:rotate(-3deg);
 }
@@ -1094,20 +1094,83 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
 .mission-product-note span{font-size:11px;color:#7d5610;line-height:1.35}
 .mission-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .mission-card{
-  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-  border-radius:16px;padding:18px;min-height:168px;display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;
+  background:#fffdf8;border:2px solid rgba(255,255,255,0.16);
+  border-radius:18px;padding:16px;min-height:206px;display:flex;flex-direction:column;justify-content:space-between;
+  color:var(--black);box-shadow:7px 7px 0 rgba(255,197,45,0.22);
+}
+.mission-card::before{
+  content:'';position:absolute;inset:auto -20px -42px auto;width:118px;height:118px;border-radius:50%;
+  background:var(--mission-pop,#ffc52d);opacity:0.34;
+}
+.mission-card.find{--mission-pop:#49c8ef}
+.mission-card.alert{--mission-pop:#ff79b0}
+.mission-card.spin{--mission-pop:#ffc52d}
+.mission-visual{
+  position:relative;z-index:1;height:82px;border:2px solid #111;border-radius:15px;
+  background:var(--mission-pop,#ffc52d);margin-bottom:12px;overflow:hidden;
+  box-shadow:4px 4px 0 rgba(17,17,17,0.14);
+}
+.mission-visual::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,0.28) 0 2px,transparent 2px 18px);
+  mix-blend-mode:soft-light;
+}
+.mission-visual.find .map-pin{
+  position:absolute;left:18px;top:16px;width:28px;height:28px;border:2px solid #111;border-radius:50% 50% 50% 0;
+  background:#fff;transform:rotate(-45deg);z-index:2;
+}
+.mission-visual.find .map-pin::after{
+  content:'';position:absolute;left:8px;top:8px;width:8px;height:8px;border-radius:50%;background:#111;
+}
+.mission-visual.find .freezer-line{
+  position:absolute;left:55px;right:14px;height:12px;border-radius:999px;background:#fff;border:2px solid #111;z-index:2;
+}
+.mission-visual.find .freezer-line.one{top:18px}
+.mission-visual.find .freezer-line.two{top:40px;width:58%;left:72px}
+.mission-visual.alert .mini-form{
+  position:absolute;left:14px;right:14px;top:15px;z-index:2;display:grid;gap:7px;
+}
+.mission-visual.alert .mini-field{
+  height:12px;border:2px solid #111;border-radius:999px;background:#fff;
+}
+.mission-visual.alert .mini-field.short{width:58%}
+.mission-visual.alert .mini-heart{
+  position:absolute;right:18px;bottom:14px;z-index:2;width:26px;height:26px;border-radius:50%;
+  background:#fff;border:2px solid #111;display:flex;align-items:center;justify-content:center;font-weight:900;color:#ff3c88;
+}
+.mission-visual.spin .wheel-mini{
+  position:absolute;left:16px;top:11px;z-index:2;width:58px;height:58px;border-radius:50%;border:3px solid #111;
+  background:conic-gradient(#ff79b0 0 25%,#fff3c5 0 50%,#49c8ef 0 75%,#ffc52d 0);
+  animation:spinPulse 1.4s ease-in-out infinite;
+}
+.mission-visual.spin .wheel-mini::after{
+  content:'';position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:#111;transform:translate(-50%,-50%);
+}
+.mission-visual.spin .reward-ticket{
+  position:absolute;right:14px;top:24px;z-index:2;transform:rotate(7deg);
+  background:#fff;border:2px solid #111;border-radius:10px;padding:8px 10px;font-size:11px;font-weight:900;
+  box-shadow:4px 4px 0 rgba(17,17,17,0.16);
+}
+@keyframes spinPulse{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(10deg) scale(1.04)}}
+.mission-chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 13px}
+.mission-chip{
+  background:#fff3c5;border:2px solid #111;border-radius:999px;padding:5px 8px;
+  font-size:9px;font-weight:900;text-transform:uppercase;color:#5f3c00;
 }
 .mission-step{
-  width:30px;height:30px;border-radius:50%;background:var(--white);color:var(--black);
-  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;margin-bottom:12px;
+  position:absolute;right:14px;top:14px;z-index:3;
+  width:28px;height:28px;border-radius:50%;background:var(--black);color:var(--white);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;
 }
-.mission-head{font-size:15px;font-weight:900;color:var(--white);margin-bottom:6px}
-.mission-copy{font-size:12px;line-height:1.5;color:rgba(255,255,255,0.54);margin-bottom:16px}
+.mission-head{position:relative;z-index:1;font-size:16px;font-weight:900;color:var(--black);margin-bottom:4px}
+.mission-copy{position:relative;z-index:1;font-size:11px;line-height:1.35;color:#5b544d;margin-bottom:0}
 .mission-btn{
-  border:0;border-radius:30px;background:var(--white);color:var(--black);
+  position:relative;z-index:1;border:2px solid #111;border-radius:30px;background:var(--black);color:var(--white);
   font-family:'DM Sans',sans-serif;font-size:12px;font-weight:900;padding:10px 13px;cursor:pointer;width:100%;
+  box-shadow:4px 4px 0 rgba(17,17,17,0.14);
 }
-.mission-btn.alt{background:#fff3c5;color:#6f4800}
+.mission-btn.alt{background:#ff79b0;color:#fff}
 .scroll-nudge{
   position:fixed;left:50%;bottom:18px;z-index:640;transform:translate(-50%,18px);
   width:min(560px,calc(100vw - 190px));background:rgba(10,10,10,0.92);color:var(--white);
@@ -1717,27 +1780,49 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
         </div>
       </div>
       <div class="mission-cards">
-        <div class="mission-card">
+        <div class="mission-card find">
           <div>
             <div class="mission-step">1</div>
-            <div class="mission-head">Find the closest freezer</div>
-            <div class="mission-copy">Jump straight to nearby Walmart, Target, Whole Foods, Kroger, or Sprouts options.</div>
+            <div class="mission-visual find">
+              <span class="map-pin"></span>
+              <span class="freezer-line one"></span>
+              <span class="freezer-line two"></span>
+            </div>
+            <div class="mission-head">Closest freezer</div>
+            <div class="mission-chip-row">
+              <span class="mission-chip">Target</span><span class="mission-chip">Walmart</span><span class="mission-chip">Whole Foods</span>
+            </div>
+            <div class="mission-copy">Tap in and jump straight to stores near you.</div>
           </div>
           <button class="mission-btn" onclick="openStoreModal(null)">Shop Nearby</button>
         </div>
-        <div class="mission-card">
+        <div class="mission-card alert">
           <div>
             <div class="mission-step">2</div>
-            <div class="mission-head">Drop your details</div>
-            <div class="mission-copy">Tell us your city and favourite product so we can alert you when Sweet Nothings is close.</div>
+            <div class="mission-visual alert">
+              <div class="mini-form"><span class="mini-field"></span><span class="mini-field short"></span></div>
+              <span class="mini-heart">♡</span>
+            </div>
+            <div class="mission-head">Flavor alerts</div>
+            <div class="mission-chip-row">
+              <span class="mission-chip">City</span><span class="mission-chip">Flavor</span><span class="mission-chip">Text me</span>
+            </div>
+            <div class="mission-copy">Leave the basics. We ping when Sweet Nothings is close.</div>
           </div>
           <button class="mission-btn alt" onclick="openLeadModal()">Get Store Alerts</button>
         </div>
-        <div class="mission-card">
+        <div class="mission-card spin">
           <div>
             <div class="mission-step">3</div>
-            <div class="mission-head">Spin for a store reward</div>
-            <div class="mission-copy">Play the locator wheel, save your reward code, then use it after a store visit.</div>
+            <div class="mission-visual spin">
+              <span class="wheel-mini"></span>
+              <span class="reward-ticket">15% POP</span>
+            </div>
+            <div class="mission-head">Reward spin</div>
+            <div class="mission-chip-row">
+              <span class="mission-chip">Spin</span><span class="mission-chip">Save code</span><span class="mission-chip">Visit store</span>
+            </div>
+            <div class="mission-copy">Unlock a store-run reward before you go.</div>
           </div>
           <button class="mission-btn" onclick="openSpinPanel()">Spin & Unlock</button>
         </div>
