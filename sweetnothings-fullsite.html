@@ -477,6 +477,75 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .ingredient-chip.cacao{right:12%;bottom:4%}
 .ingredient-chip.organic{right:24%;top:45%}
 
+/* ── CLEAN PROMISE HORIZONTAL PARALLAX ── */
+.clean-parallax{
+  position:relative;overflow:hidden;background:#fff4cf;
+  padding:72px 80px 74px;border-top:2px solid rgba(17,17,17,0.08);
+  contain:paint;
+}
+.clean-parallax::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 16% 18%,rgba(255,70,116,0.2),transparent 28%),
+    radial-gradient(circle at 88% 12%,rgba(93,200,232,0.26),transparent 30%),
+    repeating-linear-gradient(90deg,rgba(17,17,17,0.04) 0 1px,transparent 1px 32px);
+  pointer-events:none;
+}
+.clean-parallax-inner{
+  position:relative;z-index:2;display:grid;
+  grid-template-columns:minmax(230px,0.88fr) minmax(230px,0.88fr) minmax(300px,1fr);
+  gap:22px;align-items:stretch;max-width:1240px;margin:0 auto;
+}
+.clean-visual-card,.clean-copy-card{
+  border:2px solid var(--black);border-radius:22px;background:#fffdf8;
+  box-shadow:8px 10px 0 rgba(17,17,17,0.16);overflow:hidden;
+}
+.clean-visual-card{
+  min-height:360px;position:relative;will-change:transform;
+  transition:transform 0.16s linear;isolation:isolate;
+}
+.clean-visual-card::after{
+  content:attr(data-caption);position:absolute;left:18px;right:18px;bottom:18px;
+  background:rgba(255,253,248,0.9);border:1px solid rgba(17,17,17,0.12);
+  border-radius:999px;padding:10px 14px;text-align:center;
+  font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;color:#6d4b09;
+}
+.clean-visual-card img{
+  width:100%;height:100%;display:block;object-fit:cover;
+  transform:scale(1.06);filter:saturate(1.08) contrast(1.02);
+}
+.clean-visual-card.strawberry{background:#ffd5df;transform:rotate(-1.5deg)}
+.clean-visual-card.mango{background:#ffd25c;transform:rotate(1.5deg)}
+.clean-copy-card{
+  padding:30px 28px;display:flex;flex-direction:column;justify-content:center;
+  background:#ffbfd0;
+}
+.clean-mini-kicker{
+  display:inline-flex;align-self:flex-start;background:#fffdf8;border:2px solid var(--black);
+  border-radius:999px;padding:7px 12px;margin-bottom:16px;
+  font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:#be2556;
+}
+.clean-copy-card h2{
+  font-family:'Fraunces',serif;font-size:clamp(34px,3.5vw,54px);
+  font-weight:900;font-style:italic;line-height:0.98;color:var(--black);margin-bottom:18px;
+}
+.clean-list{display:grid;gap:11px;margin:0 0 22px;padding:0;list-style:none}
+.clean-list li{
+  display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;
+  font-size:15px;font-weight:900;line-height:1.22;color:#8c2345;
+}
+.clean-check{
+  width:30px;height:30px;border-radius:9px;background:#fffdf8;border:2px solid rgba(17,17,17,0.12);
+  display:grid;place-items:center;color:#12a65a;font-size:18px;box-shadow:2px 3px 0 rgba(17,17,17,0.1);
+}
+.clean-copy-card p{font-size:14px;font-weight:800;line-height:1.5;color:#6c2540}
+.clean-pop-dot{
+  position:absolute;z-index:1;width:86px;height:86px;border-radius:50%;
+  background:#5dc8e8;border:2px solid var(--black);box-shadow:5px 6px 0 rgba(17,17,17,0.16);
+}
+.clean-pop-dot.one{left:4%;bottom:24px}
+.clean-pop-dot.two{right:5%;top:28px;background:#ffc52d}
+
 /* ── PRODUCTS GRID ── */
 .products-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
@@ -1364,6 +1433,9 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
 /* ── RESPONSIVE ── */
 @media (max-width:1024px){
   .section{padding:80px 40px}
+  .clean-parallax{padding:60px 40px}
+  .clean-parallax-inner{grid-template-columns:1fr 1fr;gap:18px}
+  .clean-copy-card{grid-column:1 / -1}
   .hero-showcase{grid-template-columns:1fr;padding:76px 40px 72px;gap:34px}
   .showcase-stage{min-height:520px}
   .product-cloud{height:500px}
@@ -1503,6 +1575,16 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   .hero-marquee{padding:16px 0}
   .hero-marquee-track{animation-duration:6.5s}
   .hero-marquee span{font-size:30px;padding:0 24px}
+  .clean-parallax{padding:44px 18px 48px}
+  .clean-parallax-inner{grid-template-columns:1fr;gap:16px}
+  .clean-visual-card{min-height:280px;border-radius:16px;box-shadow:5px 7px 0 rgba(17,17,17,0.14)}
+  .clean-visual-card::after{left:12px;right:12px;bottom:12px;font-size:10px;padding:8px 10px}
+  .clean-copy-card{padding:24px 20px;border-radius:16px;box-shadow:5px 7px 0 rgba(17,17,17,0.14)}
+  .clean-copy-card h2{font-size:clamp(32px,10vw,42px);letter-spacing:0}
+  .clean-list{gap:9px}
+  .clean-list li{font-size:13.5px;grid-template-columns:28px 1fr}
+  .clean-check{width:28px;height:28px;border-radius:8px}
+  .clean-pop-dot{display:none}
   .hero-showcase{padding:58px 18px 56px;min-height:0;gap:26px}
   .showcase-title{font-size:clamp(36px,11vw,48px);letter-spacing:0}
   .showcase-text{font-size:15px;line-height:1.6;margin-bottom:22px}
@@ -1777,6 +1859,33 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
     <span>Whole Fruit</span>
   </div>
 </div>
+
+<!-- CLEAN PROMISE HORIZONTAL PARALLAX -->
+<section class="clean-parallax" id="clean-parallax">
+  <span class="clean-pop-dot one" aria-hidden="true"></span>
+  <span class="clean-pop-dot two" aria-hidden="true"></span>
+  <div class="clean-parallax-inner">
+    <figure class="clean-visual-card strawberry" data-clean-float="-1" data-caption="Strawberry & Cream">
+      <img src="https://sweetnothings.com/cdn/shop/files/Squeezables_Strawberry-With-Fruit_1200x1200_7f1ae22a-424e-4907-a493-4d3e3736d4eb.jpg?v=1762873704" alt="Sweet Nothings strawberry smoothie pop with strawberries">
+    </figure>
+    <figure class="clean-visual-card mango" data-clean-float="1" data-caption="Mango Carrot Smoothie Pops">
+      <img src="https://sweetnothings.com/cdn/shop/files/Squeezables_Mango-With-Fruit_1200x1200_1504eb06-f0f4-47df-ae9d-309db58194d5.jpg?v=1762873945" alt="Sweet Nothings mango carrot smoothie pops with fruit">
+    </figure>
+    <div class="clean-copy-card">
+      <div class="clean-mini-kicker">Clean snack promise</div>
+      <h2>Fruit first. Fun always.</h2>
+      <ul class="clean-list">
+        <li><span class="clean-check">✓</span><span>Certified Organic</span></li>
+        <li><span class="clean-check">✓</span><span>100% real fruit, veggies, and chia seeds</span></li>
+        <li><span class="clean-check">✓</span><span>No added sugar</span></li>
+        <li><span class="clean-check">✓</span><span>No artificial colors, flavors, or preservatives</span></li>
+        <li><span class="clean-check">✓</span><span>Upcycled certified ingredients</span></li>
+        <li><span class="clean-check">✓</span><span>Plant-based and gluten-free</span></li>
+      </ul>
+      <p>Scroll through the flavor cards, then jump into real reviews and real ingredients right below.</p>
+    </div>
+  </div>
+</section>
 
 <!-- BELOW-HERO PRODUCT PARALLAX -->
 <section class="hero-showcase" id="taste-showcase">
@@ -2519,6 +2628,31 @@ setTimeout(() => {
   setInterval(() => goSlide((slide+1)%3), 7000);
 }, 7000);
 
+// ── CLEAN PROMISE HORIZONTAL PARALLAX ──
+let lastCleanScrollY = window.scrollY;
+let cleanShake = 0;
+function moveCleanParallax() {
+  const section = document.getElementById('clean-parallax');
+  if (!section) return;
+  const rect = section.getBoundingClientRect();
+  if (rect.top > window.innerHeight || rect.bottom < 0) return;
+  const delta = window.scrollY - lastCleanScrollY;
+  lastCleanScrollY = window.scrollY;
+  cleanShake = Math.max(-1, Math.min(1, cleanShake * 0.72 + delta * 0.035));
+  const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+  const drift = (progress - 0.5) * 54;
+  section.querySelectorAll('[data-clean-float]').forEach(card => {
+    const dir = parseFloat(card.getAttribute('data-clean-float') || '1');
+    const x = (drift * dir + cleanShake * 18 * dir).toFixed(1);
+    const y = (Math.sin(progress * Math.PI) * 10).toFixed(1);
+    const rot = (dir * 1.5 + cleanShake * dir * 2.2).toFixed(2);
+    card.style.transform = `translate3d(${x}px,${y}px,0) rotate(${rot}deg)`;
+  });
+}
+window.addEventListener('scroll', moveCleanParallax, { passive:true });
+window.addEventListener('resize', moveCleanParallax);
+window.addEventListener('load', moveCleanParallax);
+
 // ── PARALLAX ──
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -2616,6 +2750,7 @@ window.addEventListener('resize', updateScrollNudge);
 // ── PAGE-WIDE SCROLL REVEALS ──
 function initScrollReveals() {
   const revealSelectors = [
+    '.clean-visual-card','.clean-copy-card',
     '.showcase-copy','.showcase-stage','.proof-pill',
     '.freezer-mission .mission-card',
     '.prod-card','.store-left','.store-right',
@@ -2627,9 +2762,9 @@ function initScrollReveals() {
   const els = document.querySelectorAll(revealSelectors.join(','));
   els.forEach((el, i) => {
     el.classList.add('scroll-reveal');
-    if (el.matches('.prod-card,.benefit-card,.mission-card,.ugc-review,.proof-pill')) el.classList.add('reveal-pop');
-    if (el.matches('.store-left,.lead-form-wrap,.showcase-copy')) el.classList.add('reveal-left');
-    if (el.matches('.store-right,.lead-right-content,.showcase-stage')) el.classList.add('reveal-right');
+    if (el.matches('.prod-card,.benefit-card,.mission-card,.ugc-review,.proof-pill,.clean-visual-card')) el.classList.add('reveal-pop');
+    if (el.matches('.store-left,.lead-form-wrap,.showcase-copy,.clean-visual-card.strawberry')) el.classList.add('reveal-left');
+    if (el.matches('.store-right,.lead-right-content,.showcase-stage,.clean-copy-card,.clean-visual-card.mango')) el.classList.add('reveal-right');
     el.style.transitionDelay = Math.min((i % 6) * 55, 275) + 'ms';
   });
   const observer = new IntersectionObserver(entries => {
