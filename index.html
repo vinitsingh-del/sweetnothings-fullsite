@@ -511,12 +511,14 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 
 /* ── PRODUCT DETAIL PAGES ── */
 .product-page-overlay{
-  position:fixed;inset:0;z-index:260;
+  position:fixed;inset:0;z-index:720;
   background:rgba(18,55,61,0.78);
   backdrop-filter:blur(12px);
   opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity 0.28s ease,visibility 0.28s ease;
   overflow:auto;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
 }
 .product-page-overlay.open{opacity:1;visibility:visible;pointer-events:auto}
 .product-page{
@@ -558,12 +560,21 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
   padding:10px 14px;font-size:11px;font-weight:900;text-transform:uppercase;
   box-shadow:5px 5px 0 rgba(17,17,17,0.18);
 }
+.product-hero-tags{
+  position:absolute;right:22px;top:22px;z-index:5;
+  display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:56%;
+}
+.product-hero-tags span{
+  background:#fff4c9;border:2px solid #111;border-radius:999px;
+  padding:8px 11px;font-size:10px;font-weight:900;text-transform:uppercase;
+  box-shadow:4px 4px 0 rgba(17,17,17,0.16);
+}
 .product-page-copy{
-  background:#fffdf8;padding:62px 58px;display:flex;flex-direction:column;justify-content:center;
+  background:#fffdf8;padding:54px 34px 46px 48px;display:flex;flex-direction:column;justify-content:flex-start;
   min-width:0;
 }
 .product-close{
-  position:fixed;top:22px;right:22px;z-index:270;
+  position:fixed;top:22px;right:22px;z-index:730;
   width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,0.28);
   background:rgba(0,0,0,0.46);color:#fff;font-size:22px;cursor:pointer;
 }
@@ -590,6 +601,7 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .product-primary,.product-secondary{
   border:2px solid #111;border-radius:999px;padding:14px 22px;font-family:'DM Sans',sans-serif;
   font-size:14px;font-weight:800;cursor:pointer;
+  min-height:50px;
 }
 .product-primary{background:var(--pink);color:#fff;box-shadow:5px 5px 0 rgba(17,17,17,0.22)}
 .product-secondary{background:var(--yellow);color:var(--black);box-shadow:5px 5px 0 rgba(17,17,17,0.18)}
@@ -1403,10 +1415,15 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   .product-page-media{padding:0;min-height:360px}
   .product-page-img{inset:-6%;width:112%;height:112%;max-height:none;object-fit:cover;transform:scale(1.08)}
   .product-page-video{object-position:center;min-height:100%}
+  .product-hero-tags{
+    left:12px;right:54px;top:12px;max-width:none;justify-content:flex-start;
+    display:flex;gap:7px;z-index:6;
+  }
+  .product-hero-tags span{font-size:9px;padding:7px 9px;box-shadow:3px 3px 0 rgba(17,17,17,0.15)}
   .product-media-badge{left:14px;bottom:14px;padding:8px 11px;font-size:10px;max-width:calc(100% - 28px)}
-  .product-page-copy{padding:30px 20px;overflow:hidden;width:100%;max-width:100%}
+  .product-page-copy{padding:30px 34px 30px 20px;overflow:hidden;width:100%;max-width:100%}
   .product-title{font-size:clamp(30px,9vw,36px);line-height:1.02}
-  .product-desc{font-size:13.5px;line-height:1.55;max-width:calc(100vw - 86px)}
+  .product-desc{font-size:13.5px;line-height:1.55;max-width:calc(100vw - 74px)}
   .product-shop-row{display:grid;grid-template-columns:1fr;gap:9px;margin:0 0 14px}
   .product-price-pill{padding:9px 12px;border-radius:14px}
   .product-price{font-size:24px}
@@ -1987,6 +2004,7 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
       <div class="product-page-media">
         <video class="product-page-video" id="productPageVideo" muted autoplay loop playsinline preload="metadata"></video>
         <img class="product-page-img" id="productPageImg" alt="">
+        <div class="product-hero-tags" id="productHeroTags"></div>
         <div class="product-media-badge" id="productMediaBadge">Freezer aisle favourite</div>
       </div>
       <div class="product-page-copy">
@@ -2230,15 +2248,20 @@ function releasePreloader() {
   preloader.classList.add('out');
   document.body.style.overflow = '';
 }
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(releasePreloader, 900);
-});
+function schedulePreloaderRelease() {
+  setTimeout(releasePreloader, location.hash.indexOf('#product-') === 0 ? 220 : 520);
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', schedulePreloaderRelease);
+} else {
+  schedulePreloaderRelease();
+}
 window.addEventListener('load', () => {
   setTimeout(() => {
     releasePreloader();
-  }, 700);
+  }, 320);
 });
-setTimeout(releasePreloader, 2600);
+setTimeout(releasePreloader, 1500);
 document.body.style.overflow = 'hidden';
 
 // ── NAV SCROLL ──
@@ -2516,6 +2539,7 @@ function openProductPage(pid) {
   document.getElementById('productBestFor').textContent = data.best;
   document.getElementById('productPackSize').textContent = data.pack;
   document.getElementById('productPageBadges').innerHTML = data.badges.map(b => '<span>' + b + '</span>').join('');
+  document.getElementById('productHeroTags').innerHTML = data.badges.slice(0, 2).map(b => '<span>' + b + '</span>').join('');
   document.getElementById('productReviewGrid').innerHTML = data.reviews.map((quote,i) => {
     const names = ['Maya R.','Peter B.','Sarah M.'];
     return '<div class="product-review-card"><div><div class="product-review-stars">★★★★★</div><div class="product-review-quote">' + quote + '</div></div><div class="product-review-name">' + names[i] + ' · Verified buyer</div></div>';
