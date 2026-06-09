@@ -1473,10 +1473,30 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
 /* ── RESPONSIVE POLISH ── */
 @media (min-width:1200px){
   .section{padding-left:max(80px,calc((100vw - 1180px)/2));padding-right:max(80px,calc((100vw - 1180px)/2))}
-  .hero-content{padding-left:max(80px,calc((100vw - 1180px)/2))}
+  .hero-content{padding-left:clamp(86px,5.6vw,118px)}
   .parallax-content{margin-left:max(0px,calc((100vw - 1180px)/2));padding-left:80px}
   .lead-section{padding-left:max(80px,calc((100vw - 1180px)/2));padding-right:max(80px,calc((100vw - 1180px)/2))}
   .products-grid,.benefits-grid,.ugc-reviews{gap:24px}
+}
+@media (min-width:901px){
+  .hero-content{
+    width:clamp(520px,32vw,660px);
+    max-width:660px;
+    padding-bottom:clamp(74px,8vh,104px);
+  }
+  .hero-title{
+    font-size:clamp(54px,4.9vw,82px);
+    line-height:0.94;
+    max-width:660px;
+    white-space:nowrap;
+  }
+  .hero-title span{
+    margin-bottom:10px;
+    white-space:nowrap;
+  }
+  .hero-sub{
+    max-width:500px;
+  }
 }
 @media (max-width:900px){
   html{font-size:15px}
