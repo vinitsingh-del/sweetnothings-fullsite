@@ -545,6 +545,19 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
   filter:drop-shadow(0 30px 42px rgba(80,45,0,0.25)) saturate(1.05);
   transform:scale(1.08);
 }
+.product-page-video{
+  position:absolute;z-index:3;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;display:none;
+  filter:saturate(1.08) contrast(1.03);
+}
+.product-page-media.has-video .product-page-img{opacity:0;visibility:hidden}
+.product-page-media.has-video .product-page-video{display:block}
+.product-media-badge{
+  position:absolute;left:24px;bottom:24px;z-index:5;
+  background:#fffdf8;border:2px solid #111;border-radius:999px;
+  padding:10px 14px;font-size:11px;font-weight:900;text-transform:uppercase;
+  box-shadow:5px 5px 0 rgba(17,17,17,0.18);
+}
 .product-page-copy{
   background:#fffdf8;padding:62px 58px;display:flex;flex-direction:column;justify-content:center;
   min-width:0;
@@ -558,6 +571,19 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .product-title{font-family:'Fraunces',serif;font-size:clamp(42px,5vw,76px);font-weight:900;font-style:italic;line-height:0.95;color:var(--black);margin-bottom:18px}
 .product-title,.product-desc,.product-detail-text,.product-review-quote{max-width:100%;overflow-wrap:break-word}
 .product-desc{font-size:17px;line-height:1.65;color:#444;margin-bottom:26px;width:100%}
+.product-shop-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:-6px 0 18px}
+.product-price-pill{
+  background:var(--yellow);border:2px solid #111;border-radius:16px;
+  padding:10px 14px;box-shadow:4px 4px 0 rgba(17,17,17,0.16);
+}
+.product-price{font-family:'Fraunces',serif;font-size:28px;font-style:italic;font-weight:900;line-height:1;color:#111}
+.product-price-note{font-size:10px;font-weight:900;text-transform:uppercase;color:#70470a;margin-top:4px}
+.product-rating-pill{
+  background:#fff;border:2px solid #111;border-radius:999px;
+  padding:10px 13px;font-size:12px;font-weight:900;color:#111;
+  box-shadow:4px 4px 0 rgba(17,17,17,0.12);
+}
+.product-rating-pill span{color:#b36f05;letter-spacing:1px}
 .product-badges{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:30px}
 .product-badges span{background:#fff4c9;border:2px solid #111;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;color:#5d3d07;box-shadow:3px 3px 0 rgba(17,17,17,0.15)}
 .product-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
@@ -567,6 +593,20 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 }
 .product-primary{background:var(--pink);color:#fff;box-shadow:5px 5px 0 rgba(17,17,17,0.22)}
 .product-secondary{background:var(--yellow);color:var(--black);box-shadow:5px 5px 0 rgba(17,17,17,0.18)}
+.product-pdp-panel{
+  background:#fff;border:2px solid rgba(17,17,17,0.88);border-radius:16px;
+  padding:16px;margin-bottom:18px;box-shadow:5px 5px 0 rgba(17,17,17,0.1);
+}
+.product-option-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:#8b5d08;margin-bottom:10px}
+.product-options{display:flex;flex-wrap:wrap;gap:8px}
+.product-option{
+  border:2px solid #111;border-radius:999px;background:#fff4c9;padding:8px 11px;
+  font-size:12px;font-weight:900;color:#111;
+}
+.product-stock{font-size:13px;font-weight:900;color:#0d6b3f;margin-top:12px}
+.product-bullets{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.product-bullets li{font-size:13px;font-weight:800;line-height:1.35;color:#3a342a;display:flex;gap:8px}
+.product-bullets li::before{content:'+';font-weight:900;color:var(--pink)}
 .product-details-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
   padding:28px;background:#fff4c9;border-top:2px solid rgba(17,17,17,0.15);
@@ -1358,13 +1398,26 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   .prod-footer{gap:12px}
   .prod-cta{padding:9px 14px;flex-shrink:0}
   .product-page-overlay{padding:0;box-sizing:border-box}
-  .product-page{width:calc(100vw - 28px)!important;max-width:calc(100vw - 28px)!important;margin:10px 14px 22px;border-radius:14px}
+  .product-page{width:100vw!important;max-width:100vw!important;margin:0 0 22px;border-left:0;border-right:0;border-radius:0}
   .product-page-hero{grid-template-columns:1fr;min-height:0}
   .product-page-media{padding:0;min-height:360px}
   .product-page-img{inset:-6%;width:112%;height:112%;max-height:none;object-fit:cover;transform:scale(1.08)}
+  .product-page-video{object-position:center;min-height:100%}
+  .product-media-badge{left:14px;bottom:14px;padding:8px 11px;font-size:10px;max-width:calc(100% - 28px)}
   .product-page-copy{padding:30px 20px;overflow:hidden;width:100%;max-width:100%}
   .product-title{font-size:clamp(30px,9vw,36px);line-height:1.02}
   .product-desc{font-size:13.5px;line-height:1.55;max-width:calc(100vw - 86px)}
+  .product-shop-row{display:grid;grid-template-columns:1fr;gap:9px;margin:0 0 14px}
+  .product-price-pill{padding:9px 12px;border-radius:14px}
+  .product-price{font-size:24px}
+  .product-rating-pill{font-size:11px;padding:9px 11px;width:100%;white-space:normal}
+  .product-badges{margin-bottom:16px}
+  .product-pdp-panel{padding:14px;margin-bottom:16px;border-radius:14px}
+  .product-options{display:grid;grid-template-columns:1fr}
+  .product-option{font-size:11px;padding:7px 10px;min-width:0;overflow-wrap:anywhere;text-align:center}
+  .product-stock{font-size:12px}
+  .product-bullets{margin-bottom:14px}
+  .product-bullets li{font-size:12.5px}
   .product-actions{display:grid;grid-template-columns:1fr}
   .product-primary,.product-secondary{width:100%;padding:13px 16px}
   .product-details-grid{grid-template-columns:1fr;padding:16px;gap:10px}
@@ -1932,17 +1985,32 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   <div class="product-page" id="productPage" role="dialog" aria-modal="true" aria-labelledby="productPageTitle">
     <div class="product-page-hero">
       <div class="product-page-media">
+        <video class="product-page-video" id="productPageVideo" muted autoplay loop playsinline preload="metadata"></video>
         <img class="product-page-img" id="productPageImg" alt="">
+        <div class="product-media-badge" id="productMediaBadge">Freezer aisle favourite</div>
       </div>
       <div class="product-page-copy">
         <div class="product-kicker" id="productPageKicker">Sweet Nothings Product</div>
         <h2 class="product-title" id="productPageTitle">Creamy Fruit Pops</h2>
         <p class="product-desc" id="productPageDesc">Organic fruit-forward snacks made for everyday delight.</p>
+        <div class="product-shop-row">
+          <div class="product-price-pill">
+            <div class="product-price" id="productPagePrice">$6.99</div>
+            <div class="product-price-note" id="productPriceNote">Estimated retail</div>
+          </div>
+          <div class="product-rating-pill" id="productRatingPill"><span>★★★★★</span> 4.8 (248 reviews)</div>
+        </div>
         <div class="product-badges" id="productPageBadges"></div>
+        <div class="product-pdp-panel">
+          <div class="product-option-label">Choose your store run</div>
+          <div class="product-options" id="productOptions"></div>
+          <div class="product-stock" id="productStock">Available at nearby retailers</div>
+        </div>
         <div class="product-actions">
-          <button class="product-primary" id="productFindBtn" type="button">Find Near Me</button>
+          <button class="product-primary" id="productFindBtn" type="button">Explore Nearby Stores</button>
           <button class="product-secondary" type="button" onclick="closeProductPage();openSpinPanel()">Unlock Store Reward</button>
         </div>
+        <ul class="product-bullets" id="productBullets"></ul>
         <div class="product-desc" id="productPageReward"></div>
       </div>
     </div>
@@ -2385,13 +2453,14 @@ function smoothScroll(id) {
 
 // ── PRODUCT DATA ──
 const PRODUCT_NAMES = {1:'Creamy Fruit Pops',2:'Smoothie Pops',3:'Smoothie Bowls',4:'PAW Patrol Pops',5:'Dessert Pops',6:'Nut Butter Bites'};
+const PRODUCT_VIDEO = 'watermark-removed-CREATE_A_NEAT_PARALLALEX_VIDEO.mp4';
 const PRODUCT_DETAILS = {
-  1:{kicker:'Creamy Fruit Pops',accent:'#5dc8e8',pack:'6',desc:'Creamy organic fruit pops with no added sugar, made for freezer-door cravings and lunchbox wins.',badges:['No added sugar','Whole fruit','Dairy-free pops'],taste:'Strawberry, orange, banana cream',ingredients:'Fruit, coconut cream, simple organic goodness',best:'After school, morning treats, family freezer stash',reward:'Visit a nearby store and unlock a 10% return reward after your Sweet Nothings run.',reviews:['My kids ask for these after school and I feel good saying yes.','Creamy, bright, and not weirdly sweet. The banana one disappears first.','Finally a freezer treat that tastes like fruit, not syrup.']},
-  2:{kicker:'Smoothie Pops',accent:'#f5d020',pack:'6',desc:'Bright smoothie-style pops that taste like sunshine and keep the ingredient list refreshingly short.',badges:['Organic','No preservatives','Fruit-first'],taste:'Mango, berry, banana blends',ingredients:'Organic fruit, dates, chia, flax',best:'Quick breakfasts, kids snacks, warm afternoons',reward:'Find a store nearby and use the wheel reward to plan your first freezer aisle stop.',reviews:['The texture is so smooth. It feels like a mini smoothie bar at home.','Perfect for hot afternoons when I want something light.','My freezer now has a dedicated Sweet Nothings shelf.']},
-  3:{kicker:'Smoothie Bowls',accent:'#f8b4cb',pack:'Bowl',desc:'Ready-to-blend bowls with the creamy fruit texture people want without artificial anything.',badges:['Ready to blend','Organic ingredients','Plant-based'],taste:'Berry acai, mango, strawberry',ingredients:'Fruit, seeds, plant-based creaminess',best:'Breakfast bowls, desk lunches, post-workout snacks',reward:'Leave your details for local store alerts and get notified when bowls land near you.',reviews:['I blend one before work and it tastes like I tried harder than I did.','The berry bowl is creamy without feeling heavy.','Fast breakfast, clean ingredients, zero fuss.']},
-  4:{kicker:'Kids Pops',accent:'#6aabdf',pack:'6',desc:'Playful PAW Patrol pops with a parent-friendly promise: joyful flavors and cleaner ingredients.',badges:['Kid approved','No artificial flavors','Organic options'],taste:'Creamy berry and fruit pop favorites',ingredients:'Organic fruit, dates, plant-based cream',best:'Lunchbox wins, parties, tiny dessert moments',reward:'Store visitors can unlock a family freezer reward after checking the listed aisle.',reviews:['The character box gets them excited, the ingredients make me happy.','Birthday party freezer win. No complaints from parents either.','Small treat, big joy, clean label.']},
-  5:{kicker:'Dessert Pops',accent:'#f2b08a',pack:'6',desc:'Dessert-style pops that feel indulgent while staying simple, organic, and freezer-ready.',badges:['No added sugar','Dessert texture','Plant-based'],taste:'Chocolate, peanut butter, fruit dessert notes',ingredients:'Cacao, bananas, dates, nut butter',best:'Evening dessert, snack swaps, better-for-you treats',reward:'Find the closest retailer and spin for a dessert-pop reward before you go.',reviews:['This replaces my late-night ice cream habit in the best way.','Chocolatey and creamy without the sugar crash.','Feels indulgent, reads clean. That is rare.']},
-  6:{kicker:'Nut Butter Bites',accent:'#c8d88a',pack:'12',desc:'Snackable organic bites built for mornings, afternoons, and every busy moment between.',badges:['12 packs','Organic','On-the-go'],taste:'Chocolate PB, apple cinnamon, oatmeal raisin',ingredients:'Dates, peanut butter, oats, flax, cinnamon',best:'Commutes, school bags, work breaks',reward:'Visit a nearby store and unlock a return reward for your next nut butter bite run.',reviews:['The apple cinnamon bites live in my work bag now.','Tiny, filling, and not too sweet. Exactly what I wanted.','Great before school pickup or between meetings.']}
+  1:{kicker:'Creamy Fruit Pops',accent:'#5dc8e8',pack:'6',price:'$6.99',priceNote:'Estimated retail per 6-pack',rating:'4.8',reviewCount:'248',media:'video',mediaBadge:'Creamy fruit pops in motion',desc:'Creamy organic fruit pops with no added sugar, made for freezer-door cravings and lunchbox wins.',badges:['No added sugar','Whole fruit','Dairy-free pops'],options:['Strawberry & Cream','Oranges & Cream','Bananas & Cream','6-count box'],stock:'Often found in the frozen aisle at Target, Walmart, and Whole Foods.',taste:'Strawberry, orange, banana cream',ingredients:'Fruit, coconut cream, simple organic goodness',best:'After school, morning treats, family freezer stash',bullets:['No checkout here: choose nearby stores and plan the run.','Spin before visiting to unlock a store reward.','Built for families who want dessert energy with cleaner ingredients.'],reward:'Visit a nearby store and unlock a 10% return reward after your Sweet Nothings run.',reviews:['My kids ask for these after school and I feel good saying yes.','Creamy, bright, and not weirdly sweet. The banana one disappears first.','Finally a freezer treat that tastes like fruit, not syrup.']},
+  2:{kicker:'Smoothie Pops',accent:'#f5d020',pack:'6',price:'$6.99',priceNote:'Estimated retail per 6-pack',rating:'4.7',reviewCount:'193',mediaBadge:'Smoothie-style freezer pop',desc:'Bright smoothie-style pops that taste like sunshine and keep the ingredient list refreshingly short.',badges:['Organic','No preservatives','Fruit-first'],options:['Mango','Berry','Banana blend','6-count box'],stock:'Check local frozen aisles for current flavour availability.',taste:'Mango, berry, banana blends',ingredients:'Organic fruit, dates, chia, flax',best:'Quick breakfasts, kids snacks, warm afternoons',bullets:['Fruit-first flavour without preservatives.','Easy to find by checking nearby retail availability.','Great for warm afternoons and quick breakfast moments.'],reward:'Find a store nearby and use the wheel reward to plan your first freezer aisle stop.',reviews:['The texture is so smooth. It feels like a mini smoothie bar at home.','Perfect for hot afternoons when I want something light.','My freezer now has a dedicated Sweet Nothings shelf.']},
+  3:{kicker:'Smoothie Bowls',accent:'#f8b4cb',pack:'Bowl',price:'$6.99',priceNote:'Estimated retail per bowl',rating:'4.8',reviewCount:'176',mediaBadge:'Ready-to-blend bowl',desc:'Ready-to-blend bowls with the creamy fruit texture people want without artificial anything.',badges:['Ready to blend','Organic ingredients','Plant-based'],options:['Berry Acai','Mango','Strawberry','Single bowl'],stock:'Join store alerts to know when bowls are close to you.',taste:'Berry acai, mango, strawberry',ingredients:'Fruit, seeds, plant-based creaminess',best:'Breakfast bowls, desk lunches, post-workout snacks',bullets:['Blendable breakfast texture in minutes.','Perfect for store alerts if local stock rotates.','A fuller PDP for shoppers comparing flavours.'],reward:'Leave your details for local store alerts and get notified when bowls land near you.',reviews:['I blend one before work and it tastes like I tried harder than I did.','The berry bowl is creamy without feeling heavy.','Fast breakfast, clean ingredients, zero fuss.']},
+  4:{kicker:'Kids Pops',accent:'#6aabdf',pack:'6',price:'$6.99',priceNote:'Estimated retail per 6-pack',rating:'4.9',reviewCount:'221',mediaBadge:'Kid-approved freezer treat',desc:'Playful PAW Patrol pops with a parent-friendly promise: joyful flavors and cleaner ingredients.',badges:['Kid approved','No artificial flavors','Organic options'],options:['Berry','Creamy fruit','PAW Patrol box','6-count box'],stock:'Look for character boxes in family freezer sections near you.',taste:'Creamy berry and fruit pop favorites',ingredients:'Organic fruit, dates, plant-based cream',best:'Lunchbox wins, parties, tiny dessert moments',bullets:['A familiar character box with a cleaner promise.','Use nearby stores instead of a direct checkout.','Good for parties, lunchboxes, and quick freezer wins.'],reward:'Store visitors can unlock a family freezer reward after checking the listed aisle.',reviews:['The character box gets them excited, the ingredients make me happy.','Birthday party freezer win. No complaints from parents either.','Small treat, big joy, clean label.']},
+  5:{kicker:'Dessert Pops',accent:'#f2b08a',pack:'6',price:'$7.49',priceNote:'Estimated retail per 6-pack',rating:'4.8',reviewCount:'204',mediaBadge:'Dessert texture, simple ingredients',desc:'Dessert-style pops that feel indulgent while staying simple, organic, and freezer-ready.',badges:['No added sugar','Dessert texture','Plant-based'],options:['Chocolate','Peanut Butter','Fruit dessert notes','6-count box'],stock:'Use the store finder before you go; dessert flavours can rotate.',taste:'Chocolate, peanut butter, fruit dessert notes',ingredients:'Cacao, bananas, dates, nut butter',best:'Evening dessert, snack swaps, better-for-you treats',bullets:['Indulgent texture without the usual sugar crash.','Check availability before making the freezer aisle trip.','Spin for a reward before your dessert-pop run.'],reward:'Find the closest retailer and spin for a dessert-pop reward before you go.',reviews:['This replaces my late-night ice cream habit in the best way.','Chocolatey and creamy without the sugar crash.','Feels indulgent, reads clean. That is rare.']},
+  6:{kicker:'Nut Butter Bites',accent:'#c8d88a',pack:'12',price:'$7.99',priceNote:'Estimated retail per 12-pack',rating:'4.8',reviewCount:'189',mediaBadge:'Snack packs for busy days',desc:'Snackable organic bites built for mornings, afternoons, and every busy moment between.',badges:['12 packs','Organic','On-the-go'],options:['Chocolate PB','Apple Cinnamon','Oatmeal Raisin','12 snack packs'],stock:'Explore nearby stores for snack-pack availability.',taste:'Chocolate PB, apple cinnamon, oatmeal raisin',ingredients:'Dates, peanut butter, oats, flax, cinnamon',best:'Commutes, school bags, work breaks',bullets:['Built like a standard snack PDP with store-first actions.','Good for bags, desks, commutes, and school pickups.','Unlock a reward before checking stores near you.'],reward:'Visit a nearby store and unlock a return reward for your next nut butter bite run.',reviews:['The apple cinnamon bites live in my work bag now.','Tiny, filling, and not too sweet. Exactly what I wanted.','Great before school pickup or between meetings.']}
 };
 const PRODUCT_IMGS = {
   1:'data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZ...',
@@ -2435,6 +2504,13 @@ function openProductPage(pid) {
   document.getElementById('productPageTitle').textContent = PRODUCT_NAMES[pid];
   document.getElementById('productPageDesc').textContent = data.desc;
   document.getElementById('productPageReward').textContent = data.reward;
+  document.getElementById('productPagePrice').textContent = data.price;
+  document.getElementById('productPriceNote').textContent = data.priceNote;
+  document.getElementById('productRatingPill').innerHTML = '<span>★★★★★</span> ' + data.rating + ' (' + data.reviewCount + ' reviews)';
+  document.getElementById('productOptions').innerHTML = data.options.map(option => '<span class="product-option">' + option + '</span>').join('');
+  document.getElementById('productStock').textContent = data.stock;
+  document.getElementById('productBullets').innerHTML = data.bullets.map(item => '<li>' + item + '</li>').join('');
+  document.getElementById('productMediaBadge').textContent = data.mediaBadge;
   document.getElementById('productTaste').textContent = data.taste;
   document.getElementById('productIngredients').textContent = data.ingredients;
   document.getElementById('productBestFor').textContent = data.best;
@@ -2444,9 +2520,26 @@ function openProductPage(pid) {
     const names = ['Maya R.','Peter B.','Sarah M.'];
     return '<div class="product-review-card"><div><div class="product-review-stars">★★★★★</div><div class="product-review-quote">' + quote + '</div></div><div class="product-review-name">' + names[i] + ' · Verified buyer</div></div>';
   }).join('');
+  document.getElementById('productReviewScore').textContent = data.rating + ' average · ' + data.reviewCount + ' reviews';
   const img = document.getElementById('productPageImg');
+  const media = document.querySelector('.product-page-media');
+  const video = document.getElementById('productPageVideo');
+  media.classList.remove('has-video');
+  video.pause();
+  video.removeAttribute('src');
+  video.load();
   img.src = getProductImage(pid);
   img.alt = PRODUCT_NAMES[pid];
+  if (data.media === 'video') {
+    video.src = PRODUCT_VIDEO;
+    video.muted = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.setAttribute('aria-label', PRODUCT_NAMES[pid] + ' video');
+    media.classList.add('has-video');
+    video.load();
+    video.play().catch(() => {});
+  }
   document.getElementById('productFindBtn').onclick = () => {
     closeProductPage();
     openStoreModal(pid);
@@ -2456,6 +2549,8 @@ function openProductPage(pid) {
 }
 function closeProductPage(e) {
   if (e && e.target !== document.getElementById('productPageOverlay')) return;
+  const video = document.getElementById('productPageVideo');
+  if (video) video.pause();
   document.getElementById('productPageOverlay').classList.remove('open');
   if (location.hash.indexOf('#product-') === 0) history.replaceState(null, '', location.pathname);
   document.body.style.overflow = '';
