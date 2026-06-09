@@ -938,11 +938,78 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 .benefit-text{font-size:13px;color:var(--dark);line-height:1.6}
 
 /* ── PRESS ── */
-.press-section{background:var(--white);padding:60px 80px;border-top:1px solid #e5e0d8;border-bottom:1px solid #e5e0d8}
-.press-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark);text-align:center;margin-bottom:32px}
-.press-logos{display:flex;gap:48px;justify-content:center;align-items:center;flex-wrap:wrap}
-.press-logos img{height:20px;object-fit:contain;filter:grayscale(1) contrast(1.2);opacity:0.6;transition:opacity 0.2s}
-.press-logos img:hover{opacity:0.9}
+.press-section{
+  position:relative;overflow:hidden;background:#fff4cf;
+  padding:46px 80px 52px;border-top:2px solid rgba(17,17,17,0.08);
+  border-bottom:2px solid rgba(17,17,17,0.08);contain:paint;
+}
+.press-section::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 16% 18%,rgba(255,121,176,0.18),transparent 28%),
+    radial-gradient(circle at 86% 74%,rgba(93,200,232,0.22),transparent 30%),
+    repeating-linear-gradient(135deg,rgba(17,17,17,0.045) 0 1px,transparent 1px 24px);
+  pointer-events:none;
+}
+.press-inner{
+  position:relative;z-index:2;max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;
+  transition:transform 0.18s linear;will-change:transform;
+}
+.press-label{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:clamp(24px,3.3vw,48px);
+  font-weight:900;font-style:italic;line-height:0.95;color:var(--black);
+  background:#ffc52d;border:2px solid var(--black);border-radius:999px;
+  padding:15px 22px;box-shadow:7px 8px 0 rgba(17,17,17,0.2);
+  animation:pressLabelGlow 2.4s ease-in-out infinite;
+  white-space:nowrap;
+}
+.press-logos{
+  display:grid;grid-template-columns:repeat(5,minmax(116px,1fr));
+  gap:12px;align-items:center;
+}
+.press-logo-tile{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  min-height:82px;padding:17px 16px;background:#fffdf8;border:2px solid rgba(17,17,17,0.9);
+  border-radius:18px;box-shadow:6px 7px 0 rgba(17,17,17,0.16);
+  overflow:hidden;transform:translate3d(var(--press-x,0),var(--press-y,0),0) scale(1);
+  animation:pressTileZoom 3.2s ease-in-out infinite;
+  transition:transform 0.22s ease,box-shadow 0.22s ease;
+}
+.press-logo-tile::after{
+  content:'';position:absolute;inset:-70% -40%;
+  background:linear-gradient(115deg,transparent 34%,rgba(255,255,255,0.82) 48%,transparent 62%);
+  transform:translateX(-65%) rotate(8deg);
+  animation:pressShine 2.9s ease-in-out infinite;
+  pointer-events:none;
+}
+.press-logo-tile:nth-child(2){animation-delay:0.18s}
+.press-logo-tile:nth-child(3){animation-delay:0.36s}
+.press-logo-tile:nth-child(4){animation-delay:0.54s}
+.press-logo-tile:nth-child(5){animation-delay:0.72s}
+.press-logo-tile:nth-child(2)::after{animation-delay:0.24s}
+.press-logo-tile:nth-child(3)::after{animation-delay:0.48s}
+.press-logo-tile:nth-child(4)::after{animation-delay:0.72s}
+.press-logo-tile:nth-child(5)::after{animation-delay:0.96s}
+.press-logo-tile:hover{box-shadow:9px 10px 0 rgba(17,17,17,0.18)}
+.press-logo-tile img{
+  max-width:100%;height:clamp(24px,2.4vw,38px);object-fit:contain;
+  filter:grayscale(1) contrast(1.5);opacity:0.86;position:relative;z-index:2;
+}
+@keyframes pressTileZoom{
+  0%,100%{transform:translate3d(var(--press-x,0),var(--press-y,0),0) scale(1)}
+  44%{transform:translate3d(var(--press-x,0),var(--press-y,0),0) scale(1.065)}
+  64%{transform:translate3d(var(--press-x,0),var(--press-y,0),0) scale(1.025)}
+}
+@keyframes pressShine{
+  0%,38%{transform:translateX(-75%) rotate(8deg)}
+  62%,100%{transform:translateX(75%) rotate(8deg)}
+}
+@keyframes pressLabelGlow{
+  0%,100%{filter:brightness(1);box-shadow:7px 8px 0 rgba(17,17,17,0.2)}
+  48%{filter:brightness(1.17);box-shadow:7px 8px 0 rgba(17,17,17,0.2),0 0 34px rgba(255,197,45,0.65)}
+}
 
 /* ── NEWSLETTER ── */
 .newsletter{background:var(--black);padding:100px 80px;text-align:center}
@@ -1510,6 +1577,9 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   .store-left{padding:64px 40px}
   .store-search{padding:20px}
   .press-section,.newsletter,footer{padding-left:40px;padding-right:40px}
+  .press-inner{grid-template-columns:1fr;gap:22px;text-align:center}
+  .press-label{justify-self:center}
+  .press-logos{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:640px){
   *,*::before,*::after{max-width:100vw}
@@ -1721,9 +1791,13 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   .ugc-grid{margin-top:34px;border-radius:12px}
   .ugc-reviews{gap:14px;margin-top:28px}
   .ugc-review{padding:20px 18px;border-radius:14px}
-  .press-section{padding:44px 18px}
-  .press-logos{gap:20px 26px}
-  .press-logos img{height:17px;max-width:120px}
+  .press-section{padding:34px 18px 38px}
+  .press-inner{gap:16px}
+  .press-label{font-size:30px;padding:11px 18px;box-shadow:5px 6px 0 rgba(17,17,17,0.18)}
+  .press-logos{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .press-logo-tile{min-height:64px;padding:13px 12px;border-radius:14px;box-shadow:4px 5px 0 rgba(17,17,17,0.15)}
+  .press-logo-tile:last-child{grid-column:1 / -1;justify-self:center;width:min(190px,100%)}
+  .press-logo-tile img{height:24px;max-width:128px}
   .newsletter{padding:64px 18px}
   .newsletter-sub{font-size:15px;line-height:1.5;margin-bottom:28px}
   .newsletter-input,.newsletter-btn{width:100%}
@@ -2059,6 +2133,20 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
   </div>
 </section>
 
+<!-- PRESS -->
+<section class="press-section" id="press-seen">
+  <div class="press-inner">
+    <div class="press-label">As Seen In</div>
+    <div class="press-logos" aria-label="Press logos">
+      <a class="press-logo-tile" href="https://www.theskimm.com/" target="_blank" rel="noopener" data-press-float="-0.08"><img src="https://sweetnothings.com/cdn/shop/files/The-Skimm-Black-Logo.png?v=1727958897&width=300" alt="The Skimm"></a>
+      <a class="press-logo-tile" href="https://www.foodnetwork.com/" target="_blank" rel="noopener" data-press-float="0.09"><img src="https://sweetnothings.com/cdn/shop/files/Food-Network-Black-Logo.png?v=1727958928&width=300" alt="Food Network"></a>
+      <a class="press-logo-tile" href="https://www.popsugar.com/" target="_blank" rel="noopener" data-press-float="-0.07"><img src="https://sweetnothings.com/cdn/shop/files/Popsugar-Black-Logo.png?v=1727958953&width=300" alt="Popsugar"></a>
+      <a class="press-logo-tile" href="https://www.forbes.com/" target="_blank" rel="noopener" data-press-float="0.08"><img src="https://sweetnothings.com/cdn/shop/files/Forbes-Black-Logo.png?v=1727959045&width=300" alt="Forbes"></a>
+      <a class="press-logo-tile" href="https://www.realsimple.com/" target="_blank" rel="noopener" data-press-float="-0.06"><img src="https://sweetnothings.com/cdn/shop/files/Real-Simple-Black-Logo.png?v=1727959000&width=300" alt="Real Simple"></a>
+    </div>
+  </div>
+</section>
+
 <!-- PRODUCTS -->
 <section class="section off" id="products">
   <div class="eyebrow">Our Range</div>
@@ -2187,18 +2275,6 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
     <div class="benefit-card"><div class="benefit-icon-box"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="benefit-title">Family Friendly</div><div class="benefit-text">Loved by toddlers and adults alike — a snack the whole house can agree on.</div></div>
   </div>
 </section>
-
-<!-- PRESS -->
-<div class="press-section">
-  <div class="press-label">As Seen In</div>
-  <div class="press-logos">
-    <img src="https://sweetnothings.com/cdn/shop/files/The-Skimm-Black-Logo.png?v=1727958897&width=300" alt="The Skimm">
-    <img src="https://sweetnothings.com/cdn/shop/files/Food-Network-Black-Logo.png?v=1727958928&width=300" alt="Food Network">
-    <img src="https://sweetnothings.com/cdn/shop/files/Popsugar-Black-Logo.png?v=1727958953&width=300" alt="Popsugar">
-    <img src="https://sweetnothings.com/cdn/shop/files/Forbes-Black-Logo.png?v=1727959045&width=300" alt="Forbes">
-    <img src="https://sweetnothings.com/cdn/shop/files/Real-Simple-Black-Logo.png?v=1727959000&width=300" alt="Real Simple">
-  </div>
-</div>
 
 <!-- UGC / COMMUNITY -->
 <section class="section dark" id="community">
@@ -2681,6 +2757,28 @@ window.addEventListener('scroll', moveCleanParallax, { passive:true });
 window.addEventListener('resize', moveCleanParallax);
 window.addEventListener('load', moveCleanParallax);
 
+// ── PRESS PARALLAX ──
+function movePressParallax() {
+  const section = document.getElementById('press-seen');
+  if (!section) return;
+  const rect = section.getBoundingClientRect();
+  if (rect.top > window.innerHeight || rect.bottom < 0) return;
+  const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+  const lift = (progress - 0.5) * 84;
+  const inner = section.querySelector('.press-inner');
+  if (inner) inner.style.transform = `translate3d(0,${(lift * -0.16).toFixed(1)}px,0)`;
+  section.querySelectorAll('[data-press-float]').forEach((tile, i) => {
+    const speed = parseFloat(tile.getAttribute('data-press-float') || '0');
+    const x = Math.sin(progress * Math.PI + i * 0.72) * 8;
+    const y = lift * speed;
+    tile.style.setProperty('--press-x', x.toFixed(1) + 'px');
+    tile.style.setProperty('--press-y', y.toFixed(1) + 'px');
+  });
+}
+window.addEventListener('scroll', movePressParallax, { passive:true });
+window.addEventListener('resize', movePressParallax);
+window.addEventListener('load', movePressParallax);
+
 // ── PARALLAX ──
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -2782,7 +2880,7 @@ function initScrollReveals() {
     '.showcase-copy','.showcase-stage','.proof-pill',
     '.freezer-mission .mission-card',
     '.prod-card','.store-left','.store-right',
-    '.parallax-content','.benefit-card','.press-logos img',
+    '.parallax-content','.benefit-card','.press-label','.press-logo-tile',
     '.ugc-cell','.ugc-review','.lead-form-wrap','.lead-right-content',
     '.newsletter .eyebrow','.newsletter .h2','.newsletter-sub','.newsletter-form',
     'footer .footer-top > div'
@@ -2790,7 +2888,7 @@ function initScrollReveals() {
   const els = document.querySelectorAll(revealSelectors.join(','));
   els.forEach((el, i) => {
     el.classList.add('scroll-reveal');
-    if (el.matches('.prod-card,.benefit-card,.mission-card,.ugc-review,.proof-pill,.clean-visual-card')) el.classList.add('reveal-pop');
+    if (el.matches('.prod-card,.benefit-card,.mission-card,.ugc-review,.proof-pill,.clean-visual-card,.press-logo-tile')) el.classList.add('reveal-pop');
     if (el.matches('.store-left,.lead-form-wrap,.showcase-copy,.clean-visual-card.strawberry')) el.classList.add('reveal-left');
     if (el.matches('.store-right,.lead-right-content,.showcase-stage,.clean-copy-card,.clean-visual-card.mango')) el.classList.add('reveal-right');
     el.style.transitionDelay = Math.min((i % 6) * 55, 275) + 'ms';
