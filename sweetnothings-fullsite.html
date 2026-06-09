@@ -126,9 +126,9 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
   border-radius:999px;background:#fffdf8;color:#111;font-size:12px;font-weight:900;
   text-transform:uppercase;line-height:1.08;
 }
-.hero-sticker.one{left:58%;top:18%;background:var(--yellow);--rot:-8deg}
-.hero-sticker.two{right:7%;top:34%;background:var(--pink);color:#fff;--rot:9deg}
-.hero-sticker.three{left:46%;bottom:18%;background:var(--green);--rot:6deg}
+.hero-sticker.one{right:32%;top:17%;background:var(--yellow);--rot:-7deg}
+.hero-sticker.two{right:7%;top:32%;background:var(--pink);color:#fff;--rot:8deg}
+.hero-sticker.three{right:39%;bottom:23%;background:var(--green);--rot:5deg}
 .hero-sticker.one,.hero-sticker.two,.hero-sticker.three,.hero-mini-card.one{animation:heroStickerShake 1.15s ease-in-out infinite}
 .hero-sticker.two{animation-delay:0.22s}
 .hero-sticker.three{animation-delay:0.38s}
@@ -148,9 +148,9 @@ body{background:var(--off);color:var(--black);font-family:'DM Sans',sans-serif;o
 }
 .hero-mini-card strong{display:block;font-family:'Fraunces',serif;font-size:28px;font-style:italic;line-height:1}
 .hero-mini-card span{display:block;font-size:11px;font-weight:900;text-transform:uppercase;color:#724600;margin-top:5px}
-.hero-mini-card.one{right:12%;bottom:16%;--rot:-5deg}
+.hero-mini-card.one{right:11%;bottom:19%;--rot:-5deg}
 .hero-mini-card.two{
-  left:40%;top:28%;--rot:5deg;background:#ffe8ef;
+  right:46%;top:27%;--rot:4deg;background:#ffe8ef;
   animation:heroStarShine 1.8s ease-in-out infinite;
 }
 @keyframes heroStarShine{
@@ -2156,12 +2156,21 @@ footer{background:var(--black);border-top:1px solid #1c1c1c;padding:64px 80px 40
 
 <script>
 // ── PRELOADER ──
+function releasePreloader() {
+  const preloader = document.getElementById('preloader');
+  if (!preloader || preloader.classList.contains('out')) return;
+  preloader.classList.add('out');
+  document.body.style.overflow = '';
+}
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(releasePreloader, 900);
+});
 window.addEventListener('load', () => {
   setTimeout(() => {
-    document.getElementById('preloader').classList.add('out');
-    document.body.style.overflow = '';
-  }, 1900);
+    releasePreloader();
+  }, 700);
 });
+setTimeout(releasePreloader, 2600);
 document.body.style.overflow = 'hidden';
 
 // ── NAV SCROLL ──
